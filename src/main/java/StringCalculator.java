@@ -1,15 +1,17 @@
 public class StringCalculator {
 
-    public static int add(String numbersString) {
-        if (numbersString.length() == 0) {
+    public static final String DEFAULT_DELIMITER_EXPRESSION = ",|\\n";
+
+    public static int add(String inString) {
+        String delimiterExpression = DEFAULT_DELIMITER_EXPRESSION;
+        if (isOptionalDelimiterParameterPresent(inString)) {
+            delimiterExpression = delimiterExpression.concat("|").concat(retrieveOptionalDelimiter(inString));
+            inString = removeOptionalDelimiterParameterFromInput(inString);
+        }
+        if (inString.length() == 0) {
             return 0;
         }
-        String delimiter = ",|\\n";
-        if (isOptionalDelimiterParameterPresent(numbersString)) {
-            delimiter = delimiter.concat("|").concat(retrieveOptionalDelimiter(numbersString));
-            numbersString = removeOptionalDelimiterParameterFromInput(numbersString);
-        }
-        return sumOfValues(delimiter,numbersString);
+        return sumOfValues(delimiterExpression,inString);
     }
 
     private static boolean isOptionalDelimiterParameterPresent(String numbersString) {
@@ -34,7 +36,7 @@ public class StringCalculator {
 
     private static int getValueOfNumber(String element) {
         try {
-            System.out.println("parsing " + element);
+            System.out.println("parsing '" + element + "' for value.");
             return Integer.parseInt(element);
         } catch (NumberFormatException ex) {
             return 0;

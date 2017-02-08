@@ -23,6 +23,13 @@ public class StringCalculatorShould {
         assertThat(new StringCalculator().add("10,10"),is(20));
     }
 
+
+    @Test
+    public void
+    two_delimiters_and_absent_number(){
+        assertThat(new StringCalculator().add("10,,10"),is(20));
+    }
+
     @Test
     public void
     three_numbers(){
