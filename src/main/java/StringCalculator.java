@@ -1,5 +1,4 @@
 public class StringCalculator {
-
     public static final String DEFAULT_DELIMITER_EXPRESSION = ",|\\n";
 
     public static int add(String inString) {
@@ -14,21 +13,21 @@ public class StringCalculator {
         return sumOfValues(delimiterExpression,inString);
     }
 
-    private static boolean isOptionalDelimiterParameterPresent(String numbersString) {
-        return (numbersString.startsWith("//;\n"));
+    private static boolean isOptionalDelimiterParameterPresent(String inString) {
+        return (inString.startsWith("//;\n"));
     }
 
-    private static String retrieveOptionalDelimiter(String numbersString) {
-        return String.valueOf(numbersString.charAt(2));
+    private static String retrieveOptionalDelimiter(String inString) {
+        return String.valueOf(inString.charAt(2));
     }
 
-    private static String removeOptionalDelimiterParameterFromInput(String numbersString) {
-        return numbersString.substring(4);
+    private static String removeOptionalDelimiterParameterFromInput(String inString) {
+        return inString.substring(4);
     }
 
-    private static int sumOfValues(String delimiter, String numbersString) {
+    private static int sumOfValues(String delimiterExpression, String inString) {
         int sumOfIntegers = 0;
-        for (String number : (numbersString.split(delimiter))) {
+        for (String number : (inString.split(delimiterExpression))) {
             sumOfIntegers = sumOfIntegers + getValueOfNumber(number);
         }
         return sumOfIntegers;
